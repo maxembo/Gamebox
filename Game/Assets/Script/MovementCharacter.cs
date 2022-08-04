@@ -23,8 +23,8 @@ public class MovementCharacter : ScriptableObject
     public float MovementSpeed => movementSpeed;
     public float RunSpeed => runSpeed;
     public float AngularSpeed => angulatSpeed;
-    public float Gravity => gravity;
-    public float JumpForce => jumpForce;
+    public float Gravity => gravity/10;
+    public float JumpForce => jumpForce/ 100f;
 
 }
 

@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
             direction = transform.TransformDirection(inputH,0,inputV).normalized;
 
             PlayAnimation();
+            Jump();
         }
 
         direction.y -= character.Gravity * Time.deltaTime;
@@ -77,13 +78,22 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, look, speed);
     }
 
+    private void Jump()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            animator.SetTrigger("Jump");
+            direction.y += character.JumpForce;
+        }
+    }
+
     private void PlayAnimation()
     {
         float horizontal = run * inputH + inputH;
         float vertical = run * inputV + inputV;
 
-        animator.SetFloat("Vertical",inputV);
-        animator.SetFloat("Horizontal",inputH);
+        animator.SetFloat("Vertical",vertical);
+        animator.SetFloat("Horizontal",horizontal);
     }
     
 }
