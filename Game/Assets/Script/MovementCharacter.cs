@@ -18,6 +18,8 @@ public class MovementCharacter : ScriptableObject
 
     [SerializeField] private float jumpForce = 7f;
 
+    [SerializeField] private float doubleJump = 5f;
+
     public bool VisibleCursor => visibleCursor;
 
     public float MovementSpeed => movementSpeed;
@@ -25,6 +27,7 @@ public class MovementCharacter : ScriptableObject
     public float AngularSpeed => angulatSpeed;
     public float Gravity => gravity/10;
     public float JumpForce => jumpForce/ 100f;
+    public float DoubleJump => doubleJump/ 100f;
 
 }
 

@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     private float inputH, inputV, run;
 
+    private int countJump;
+
     private CharacterController controller;
 
     private Vector3 direction;
@@ -53,9 +55,13 @@ public class PlayerController : MonoBehaviour
             PlayAnimation();
             Jump();
         }
-
+        else
+        {
+            DoubleJump();
+        }
+        
         direction.y -= character.Gravity * Time.deltaTime;
-
+        
         float speed = run * character.RunSpeed + character.MovementSpeed;
 
         Vector3 dir = direction * speed * Time.deltaTime;
@@ -79,14 +85,25 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Jump()
-    {
+    {   
         if (Input.GetButtonDown("Jump"))
         {
             animator.SetTrigger("Jump");
             direction.y += character.JumpForce;
+            countJump++;
+        }
+        
+    } 
+   private void DoubleJump()
+    {
+        if(Input.GetButtonDown("Jump") && countJump > 0 && controller.isGrounded == false)
+        {
+            animator.SetTrigger("Jump");
+            direction.y += character.DoubleJump;
+            countJump--;
         }
     }
-
+   
     private void PlayAnimation()
     {
         float horizontal = run * inputH + inputH;
