@@ -9,7 +9,7 @@ public class MovementCharacter : ScriptableObject
 
     [SerializeField] private float movementSpeed = 1f;
 
-    [SerializeField] private float runSpeed = 1.6f;
+    [SerializeField] private float runSpeed = 2.5f;
 
 
     [SerializeField] private float angulatSpeed = 150f;

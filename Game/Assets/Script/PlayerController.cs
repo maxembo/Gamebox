@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
@@ -10,6 +11,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private MovementCharacter character;
 
     [SerializeField] private Transform camera;
+    
+    [SerializeField] private Text score;
+
 
     private float inputH, inputV, run;
 
@@ -29,17 +33,22 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
+     private int coins = 0;
+
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         Cursor.visible = character.VisibleCursor;
+        
     }
 
     private void Update()
     {
         Movement();
         PlayerRotate();
+        
     }
     private void Movement()
     {
@@ -112,5 +121,16 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Vertical",vertical);
         animator.SetFloat("Horizontal",horizontal);
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.gameObject.tag == "Money")
+        {
+            
+            coins++;
+            score.text = $"SCORE: {coins.ToString()}";
+            Destroy(other.gameObject);
+        }
+    }
 }
